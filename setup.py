@@ -1,4 +1,12 @@
 from setuptools import setup, find_packages
+import os
+
+def read(*paths):
+    with open(os.path.join(*paths), 'r') as f:
+        return f.read()
+
+def read_requirements(*paths):
+    return read(*paths).strip().split('\n')
 
 setup (
     name="dundie",
@@ -12,4 +20,17 @@ setup (
         ]
     }
 )
+
+install_requires=[],
+
+extras_require={
+        'test': [
+            'pytest'
+        ],  # Included for testing purposes only
+        'dev': [
+            'ipython', 
+            'ipd', 
+            'mypy'] 
+        }
+
 

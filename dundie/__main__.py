@@ -2,6 +2,14 @@ import os
 import argparse
 
 
+def load(filepath):
+    try:
+        with open(filepath, "r") as file:
+            for line in file:
+                print(line.strip())
+    except FileNotFoundError as e:
+        print(f"File not found: {filepath}")
+
 def main():
     parser = argparse.ArgumentParser(
     description='Dunder Mifflin Reward Point System',
@@ -20,6 +28,12 @@ def main():
     )
     args = parser.parse_args()
     print(args)
+
+    try:
+        globals()["args.subcommand"] = load(args.filepath)
+    except KeyError:
+        print(f"File not found: {args.filepath}")
+        return
 
 
 if __name__ == "__main__":
